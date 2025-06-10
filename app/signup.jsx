@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 
-function LoginScreen() {
+function SignUpScreen() {
 
   const [fontsLoaded] = useFonts({
     NunitoSans_700Bold,
@@ -20,18 +20,31 @@ function LoginScreen() {
       </View>
       <View style={styles.info_container}>
         <View style={styles.input_group_top}>
-          <Text style={styles.label}>E-mail</Text>
-            <TextInput defaultValue="Seu E-mail" style={styles.input_field}>
+          <Text style={styles.label}>Nome</Text>
+            <TextInput defaultValue="Seu Nome" style={styles.input_field}>
           </TextInput>
         </View>
+
+        <View style={styles.input_group}>
+          <Text style={styles.label}>E-mail</Text>
+          <TextInput defaultValue="Seu E-mail" style={styles.input_field}>
+          </TextInput>
+        </View>
+
         <View style={styles.input_group}>
           <Text style={styles.label}>Senha</Text>
           <TextInput defaultValue="Sua Senha" style={styles.input_field}>
           </TextInput>
         </View>
 
-        <Link href={"/main_screen"} style={styles.enter_button}>
-          <Text style={styles.label}>Entrar</Text>
+        <View style={styles.input_group}>
+          <Text style={styles.label}>Confirme a Senha</Text>
+          <TextInput defaultValue="Sua Senha" style={styles.input_field}>
+          </TextInput>
+        </View>
+
+        <Link href={"/"} style={styles.enter_button}>
+          <Text style={styles.label}>Cadastrar</Text>
         </Link>
       </View>
     </View>
@@ -103,5 +116,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-export default LoginScreen;
+export default SignUpScreen;
 

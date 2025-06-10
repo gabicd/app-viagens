@@ -16,7 +16,7 @@ export default function Index() {
         </Link>
       
 
-        <Link href={''} style={styles.signup_button}>
+        <Link href={'/signup'} style={styles.signup_button}>
           <Text style={styles.login_button_text}>Cadastre-se</Text>
         </Link>
 
