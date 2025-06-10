@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Link } from "expo-router";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   return (
@@ -9,13 +10,15 @@ export default function Index() {
             resizeMode="cover"
             source={require('/home/gabis/projetos/rn-app/assets/images/vetor mapa.png')}/>
       
-        <TouchableOpacity style={styles.login_button}>
+      
+        <Link href={"/login"} style={styles.login_button}>
           <Text style={styles.login_button_text}>Entrar com email</Text>
-        </TouchableOpacity>
+        </Link>
+      
 
-        <TouchableOpacity style={styles.signup_button}>
+        <Link href={''} style={styles.signup_button}>
           <Text style={styles.login_button_text}>Cadastre-se</Text>
-        </TouchableOpacity>
+        </Link>
 
         <Text style={styles.option_text}>Ou então, continue com uma rede social</Text>
       </View>
