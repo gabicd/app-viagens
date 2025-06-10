@@ -1,13 +1,7 @@
-import { NunitoSans_700Bold } from "@expo-google-fonts/nunito-sans";
-import { useFonts } from "expo-font";
 import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 
 function LoginScreen() {
-
-  const [fontsLoaded] = useFonts({
-    NunitoSans_700Bold,
-  });
 
   return (
     <View style={styles.container}>

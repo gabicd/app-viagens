@@ -1,42 +1,40 @@
-import { NunitoSans_700Bold } from "@expo-google-fonts/nunito-sans";
 import Feather from '@expo/vector-icons/Feather';
-import { useFonts } from "expo-font";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { Dimensions, Image, Pressable, StyleSheet, Text, View } from "react-native";
 
+const { width: screenWidth } = Dimensions.get('window');
 
 function MainScreen() {
-      const [fontsLoaded] = useFonts({
-    NunitoSans_700Bold,
-  });
-
-  const { width: screenWidth } = Dimensions.get('window');
-
-
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-            
                 <Image style={styles.user_icon} resizeMode="cover" source={require('/home/gabis/projetos/rn-app/assets/images/profile.jpeg')}></Image>
                 <Text style={styles.user_name}>Nome usuário</Text>
-                    <Feather style={styles.search_icon} name="search" size={24} color="#F18701" />
-                
+                  <Feather style={styles.search_icon} name="search" size={24} color="#F18701" />    
         </View>
+        
         <View style={styles.card_container} >
             <View style={[styles.card_row, { width: screenWidth - 40}]}>
-                <View style={styles.card_small}>
-                    <Image
-                        source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
-                        style={styles.cardImage}
-                        resizeMode="cover" 
-                    />
-
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Título do Meu Card</Text>
-                    </View>            
                 
-                </View>
+                <Link href={"/novoroteiro"} asChild>
+                    <Pressable>
+                      <View style={[styles.card_small, { width: screenWidth/2 - 30}]}>
+                        <Image
+                            source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
+                            style={styles.cardImage}
+                            resizeMode="cover" 
+                        />
+                        <View style={styles.cardContent}>
+                            <Text style={styles.cardTitle}>Novo Roteiro</Text>
+                        </View>            
+                    </View> 
+                    </Pressable>
 
-                <View style={styles.card_small}>
+                </Link>
+               
+                
+
+                <View style={[styles.card_small, { width: screenWidth/2 - 30}]}>
                     <Image
                         source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
                         style={styles.cardImage}
@@ -103,6 +101,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
+
   card_container: {
     flex: 5,
     width: "100%",
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
   },
 
     card_small: {
-    width: 180, 
     backgroundColor: '#FFFFFF', 
     borderRadius: 10, 
     overflow: 'hidden', 
@@ -147,7 +145,7 @@ const styles = StyleSheet.create({
   },
 
     card: {
-    width: 300, 
+
     backgroundColor: '#FFFFFF', 
     borderRadius: 10, 
     overflow: 'hidden', 
@@ -181,8 +179,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
      
-  }
+  },
 
+  back_header: {
+    width: "100%",
+    flexDirection: "column",
+    backgroundColor: "#FAFAFA",
+    justifyContent: "flex-start",
+    alignItems: "center",
+
+  }
 });
 
 export default MainScreen;
