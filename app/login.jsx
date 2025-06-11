@@ -1,10 +1,27 @@
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from "expo-router";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from 'react';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 function LoginScreen() {
 
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
+
   return (
     <View style={styles.container}>
+      
+      <Link href={"/"} asChild>
+        <TouchableOpacity style={styles.back_arrow}>
+          <AntDesign  name="arrowleft" size={18} color="#3D348B" />
+        </TouchableOpacity>
+      </Link>
+      
       <View style={styles.div_logo}>
         <Image
           style={styles.app_logo}
@@ -15,13 +32,30 @@ function LoginScreen() {
       <View style={styles.info_container}>
         <View style={styles.input_group_top}>
           <Text style={styles.label}>E-mail</Text>
-            <TextInput defaultValue="Seu E-mail" style={styles.input_field}>
+            <TextInput placeholder="Seu E-mail" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}>
           </TextInput>
         </View>
         <View style={styles.input_group}>
           <Text style={styles.label}>Senha</Text>
-          <TextInput defaultValue="Sua Senha" style={styles.input_field}>
-          </TextInput>
+         <View style={styles.input_elements}>
+            <TextInput
+              placeholder="Sua Senha"
+              placeholderTextColor='rgba(217, 217, 217, 0.28)'
+              style={styles.input_field_password} 
+              secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={setPassword}
+            />
+
+            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.toggleButton}>
+              { showPassword ? (
+                <Entypo name="eye" size={24} color="#FFFFFF" />
+              ) : (
+                <Entypo name="eye-with-line" size={24} color="#FFFFFF" />
+              )
+              }
+            </TouchableOpacity>
+          </View>
         </View>
 
         <Link href={"/main_screen"} style={styles.enter_button}>
@@ -51,6 +85,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  back_arrow: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
+  },
+
   info_container: {
     flex: 4,
     width: "100%",
@@ -70,20 +111,47 @@ const styles = StyleSheet.create({
   },
 
   input_field: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    fontSize: 16,
-    color: "#000",
+    fontSize: 15,
+    fontFamily: 'NunitoSans_700Bold',
+    color: "#FFFFFF",
     borderRadius: 8,
     paddingHorizontal: 16,
+    paddingVertical: 12,
+    
     marginBottom: 16,
-    backgroundColor: "#D9D9D9",
-    opacity: 0.28,
+    backgroundColor: 'rgba(217, 217, 217, 0.28)',
+    
+  },
+
+  input_elements: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+    position: 'relative', 
+    width: '100%', 
+    height: 50, 
+    marginBottom: 16, 
+  },
+
+
+  input_field_password: {
+    flex: 1, 
+    width: '100%',
+    height: '100%', 
+    fontSize: 15,
+    fontFamily: 'NunitoSans_700Bold',
+    color: "#FFFFFF",
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    paddingRight: 50, 
+    backgroundColor: 'rgba(217, 217, 217, 0.28)',
   },
 
   label: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 15,
     marginBottom: 8,
     fontFamily: 'NunitoSans_700Bold',
   },
@@ -92,9 +160,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#7678ED',
     borderRadius: 8,
     paddingVertical: 12,
-    paddingHorizontal: 100,
+    paddingHorizontal: 80,
     marginTop: 32 ,
     alignSelf: 'center',
+  },
+
+    toggleButton: {
+    position: 'absolute', 
+    right: 15, 
   },
 });
 export default LoginScreen;

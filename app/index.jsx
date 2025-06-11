@@ -8,22 +8,21 @@ export default function Index() {
         <Image
             style={styles.app_logo}
             resizeMode="cover"
-            source={require('/home/gabis/projetos/rn-app/assets/images/vetor mapa.png')}/>
+            source={require('/home/gabis/projetos/rn-app/assets/images/vetor mapa corrigido.png')}/>
       
-      
+      <View style={styles.div_buttons}>
+        
         <Link href={"/login"} style={styles.login_button}>
           <Text style={styles.login_button_text}>Entrar com email</Text>
         </Link>
       
-
         <Link href={'/signup'} style={styles.signup_button}>
           <Text style={styles.login_button_text}>Cadastre-se</Text>
         </Link>
 
         <Text style={styles.option_text}>Ou então, continue com uma rede social</Text>
-      </View>
-      <View style={styles.div_icons}>
-        
+
+      <View style={styles.div_icons}>        
         <Image
             style={styles.social_icon}
             source={require('/home/gabis/projetos/rn-app/assets/images/facebook.png')}/>
@@ -31,10 +30,11 @@ export default function Index() {
         <Image
             style={styles.social_icon}
             source={require('/home/gabis/projetos/rn-app/assets/images/google.png')}/>
+      </View>
+      </View>
 
 
       </View>
-
     </View>
   );
 }
@@ -44,10 +44,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
 
   div_logo: {
-    flex: 3,
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 150,
+  },
+
+  div_buttons: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
   },
 
   div_icons: {
@@ -55,27 +66,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    marginTop: 0,
+    marginTop: 20 ,
   },
 
   app_logo: {
-    width: 400,
-    height: 400,
+    width: 200,
+    height: 200,
   },
   login_button: {
     backgroundColor: '#3D348B',
-    borderRadius: 8,
+    borderRadius: 10,
     paddingVertical: 16,
-    paddingHorizontal: 32,
+    paddingHorizontal: 60,
     marginTop: 24,
     alignSelf: 'center',
   },
 
   signup_button: {
     backgroundColor: '#7678ED',
-    borderRadius: 8,
+    borderRadius: 10,
     paddingVertical: 16,
-    paddingHorizontal: 48,
+    paddingHorizontal: 76,
     marginTop: 24,
     alignSelf: 'center',
   },
@@ -83,16 +94,16 @@ const styles = StyleSheet.create({
   login_button_text: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'NunitoSans_700Bold',
     textAlign: 'center',
   },
 
   option_text: {
     color: '#B2B2B2',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'NunitoSans_700Bold',
     textAlign: 'center',
-    marginTop: 24,
+    marginTop: 32,
   },
 
   social_icon: {
