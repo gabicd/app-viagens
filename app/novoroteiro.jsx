@@ -1,14 +1,31 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link } from 'expo-router';
+import { useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const { width: screenWidth } = Dimensions.get('window');
 
 function NovoRoteiro (){
 
+  const [selectedMood, setSelectedMood] = useState(null);
+  
+
+  const handleSelectMood = (mood) => {
+      setSelectedMood(mood);
+      console.log(`Selected mood: ${mood}`); 
+      
+  }
+
+
 return (
     <View style={styles.container}>
       <View style={styles.header}>  
-        <AntDesign name="arrowleft" size={16} color="black" />
+        <Link href="/main_screen" asChild>
+          <TouchableOpacity>
+            <AntDesign name="arrowleft" size={16} color="black" />
+          </TouchableOpacity>
+        </Link>        
+       
         <Text style={styles.texto_header}>Novo Roteiro</Text>
       </View>
       <View style={styles.selecao_mood}> 
@@ -16,14 +33,30 @@ return (
       
         <View style={styles.mood_row}>
             <View style={styles.mood_icon}>
-                <Image style={styles.mood_image} source={require('/home/gabis/projetos/rn-app/assets/images/icon relaxado.png')}>
-                </Image>
+
+                <TouchableOpacity onPress={() => handleSelectMood('relaxado')}>
+                  <View style={[styles.mood_image_container, selectedMood === 'relaxado' && styles.mood_image_container_selected]}>
+                  <View style={styles.circulo_interno}>
+                      <Image style={[styles.mood_image, selectedMood === 'Relaxado' && styles.imagem_selecionada]} source={require('../assets/images/icon relaxado.png')}>
+                      </Image>      
+                    </View>  
+                  
+                  </View>
+                </TouchableOpacity>
+                
                 <Text style={styles.mood_text}>Relaxado</Text>
             </View>
             
             <View style={styles.mood_icon}>
-                <Image style={styles.mood_image} source={require('/home/gabis/projetos/rn-app/assets/images/icon aventureiro.png')}>
-                </Image>
+              <TouchableOpacity onPress={() => handleSelectMood('aventureiro')}>
+                <View style={[styles.mood_image_container, selectedMood === 'aventureiro' && styles.mood_image_container_selected]}>
+                  <View style={styles.circulo_interno}>
+                    <Image style={styles.mood_image} source={require('../assets/images/icon aventureiro.png')}>
+                    </Image>
+                  </View>  
+                </View>
+              </TouchableOpacity>
+
                 <Text style={styles.mood_text}>Aventureiro</Text>
             </View>
 
@@ -31,14 +64,31 @@ return (
 
                 <View style={styles.mood_row}>
             <View style={styles.mood_icon}>
-                <Image style={styles.mood_image} source={require('/home/gabis/projetos/rn-app/assets/images/icon romantico.png')}>
-                </Image>
+                <TouchableOpacity onPress={() => handleSelectMood('romantico')}>
+                  
+                  <View style={[styles.mood_image_container, selectedMood === 'romantico' && styles.mood_image_container_selected]}>
+                    <View style={styles.circulo_interno}>
+                      <Image style={styles.mood_image} source={require('../assets/images/icon romantico.png')}>
+                      </Image>
+                    </View>
+                  </View>
+
+                </TouchableOpacity>
+                
                 <Text style={styles.mood_text}>Romântico</Text>
             </View>
             
             <View style={styles.mood_icon}>
-                <Image style={styles.mood_image} source={require('/home/gabis/projetos/rn-app/assets/images/icon social.png')}>
-                </Image>
+                <TouchableOpacity onPress={() => handleSelectMood('social')}>
+                <View style={[styles.mood_image_container, selectedMood === 'social' && styles.mood_image_container_selected]}>
+                  <View style={styles.circulo_interno}>
+                    <Image style={styles.mood_image} source={require('../assets/images/icon social.png')}>
+                    </Image>                    
+                  </View>
+                </View>
+
+                </TouchableOpacity>
+                
                 <Text style={styles.mood_text}>Social</Text>
             </View>
 
@@ -112,10 +162,43 @@ const styles = StyleSheet.create({
   },
 
   mood_image: {
-    width: screenWidth/2 - 80, // 20% of screen width
-    height: screenWidth/2 - 80, // 20% of screen width
-    marginBottom: 5,
+    width: screenWidth/2 - 80, 
+    height: screenWidth/2 - 80, 
+    
   },
+
+  mood_image_container: {
+    
+    width: screenWidth / 2 - 68, 
+    height: screenWidth / 2 - 68, 
+    borderRadius: (screenWidth / 2 - 70) / 2, 
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+
+  mood_image_container_selected: {
+    backgroundColor: '#42e3f5', 
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
+
+    circulo_interno: {
+    width: screenWidth / 2 - 73, 
+    height: screenWidth / 2 - 73, 
+    borderRadius: (screenWidth / 2 - 70) / 2, 
+        backgroundColor: 'white', // Fundo branco para criar a separação
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
   mood_text: {
     marginTop: 5,

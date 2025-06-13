@@ -5,20 +5,22 @@ import { Dimensions, Image, Pressable, StyleSheet, Text, View } from "react-nati
 const { width: screenWidth } = Dimensions.get('window');
 
 function MainScreen() {
+
+
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-                <Image style={styles.user_icon} resizeMode="cover" source={require('/home/gabis/projetos/rn-app/assets/images/profile.jpeg')}></Image>
-                <Text style={styles.user_name}>Nome usuário</Text>
-                  <Feather style={styles.search_icon} name="search" size={24} color="#F18701" />    
+            <Image style={styles.user_icon} resizeMode="cover" source={require('../assets/images/profile.jpeg')}></Image>
+              <Text style={styles.user_name}>Nome usuário</Text>
+              <Feather style={styles.search_icon} name="search" size={24} color="#F18701" />    
         </View>
         
         <View style={styles.card_container} >
-            <View style={[styles.card_row, { width: screenWidth - 40}]}>
+            <View style={styles.card_row}>
                 
                 <Link href={"/novoroteiro"} asChild>
                     <Pressable>
-                      <View style={[styles.card_small, { width: screenWidth/2 - 30}]}>
+                      <View style={styles.card_small}>
                         <Image
                             source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
                             style={styles.cardImage}
@@ -30,11 +32,9 @@ function MainScreen() {
                     </View> 
                     </Pressable>
 
-                </Link>
-               
-                
+                </Link>       
 
-                <View style={[styles.card_small, { width: screenWidth/2 - 30}]}>
+                <View style={styles.card_small}>
                     <Image
                         source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
                         style={styles.cardImage}
@@ -42,12 +42,12 @@ function MainScreen() {
                     />
 
                     <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Título do Meu Card</Text>
+                        <Text style={styles.cardTitle}>Pontos Mood</Text>
                     </View>            
                 </View>
             </View>
 
-            <View style={[styles.card, { width: screenWidth - 40}]}>
+            <View style={styles.card}>
                 <Image
                     source={{ uri: 'https://placehold.co/600x300/D9D9D9/D9D9D9/png' }} 
                     style={styles.cardImage}
@@ -58,7 +58,7 @@ function MainScreen() {
                 </View>
             </View>
 
-            <View style={[styles.card, { width: screenWidth - 40}]}>
+            <View style={styles.card}>
                 <Image
                     source={{ uri: 'https://placehold.co/600x300/D9D9D9/D9D9D9/png' }} 
                     style={styles.cardImage}
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
   },
 
     card_small: {
+    width: screenWidth/2 - 30,
     backgroundColor: '#FFFFFF', 
     borderRadius: 10, 
     overflow: 'hidden', 
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
   },
 
     card: {
-
+    width: screenWidth - 40,  
     backgroundColor: '#FFFFFF', 
     borderRadius: 10, 
     overflow: 'hidden', 
@@ -176,6 +177,7 @@ const styles = StyleSheet.create({
   },
 
   card_row:{
+    width: screenWidth - 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
      

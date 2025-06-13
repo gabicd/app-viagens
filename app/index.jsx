@@ -25,11 +25,11 @@ export default function Index() {
       <View style={styles.div_icons}>        
         <Image
             style={styles.social_icon}
-            source={require('/home/gabis/projetos/rn-app/assets/images/facebook.png')}/>
+            source={require('../assets/images/facebook2.png')}/>
 
         <Image
             style={styles.social_icon}
-            source={require('/home/gabis/projetos/rn-app/assets/images/google.png')}/>
+            source={require('../assets/images/google3.png')}/>
       </View>
       </View>
 

@@ -1,32 +1,62 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
-import { Link } from "expo-router";
-import { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Asset } from 'expo-asset';
+import { Link, useRouter } from "expo-router";
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, InteractionManager, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 function LoginScreen() {
 
+  const router = useRouter();
+  const mapaImage = require('../assets/images/vetor-mapa.png');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const imageAsset = Asset.fromModule(mapaImage);
+        await imageAsset.downloadAsync();
+      } catch (error) {
+        console.error("Error loading images:", error);
+      }
+
+      finally {
+        InteractionManager.runAfterInteractions(() => {
+        setImagesLoaded(true);
+        });
+      }
+    };
+    
+    loadImages();
+  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }
 
+  if (!imagesLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#3D348B" />
+      </View>
+    );
+  }
+
+
   return (
     <View style={styles.container}>
-      
-      <Link href={"/"} asChild>
-        <TouchableOpacity style={styles.back_arrow}>
+        <TouchableOpacity style={styles.back_arrow} onPress={() => router.back()}>
           <AntDesign  name="arrowleft" size={18} color="#3D348B" />
         </TouchableOpacity>
-      </Link>
+      
       
       <View style={styles.div_logo}>
         <Image
           style={styles.app_logo}
           resizeMode="cover"
-          source={require('/home/gabis/projetos/rn-app/assets/images/vetor mapa.png')}
+          source={require('../assets/images/vetor-mapa.png')}
         />
       </View>
       <View style={styles.info_container}>
@@ -99,6 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "#3D348B",
     marginTop: 64,
+    borderRadius: 20,
   },
 
   input_group: {
@@ -119,7 +150,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    
     marginBottom: 16,
     backgroundColor: 'rgba(217, 217, 217, 0.28)',
     
