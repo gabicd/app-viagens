@@ -1,20 +1,50 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { RangeSlider } from '@react-native-assets/slider';
+import { useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
     const { width: screenWidth } = Dimensions.get('window');
 
     function Filter () {
 
-    const sliderThumb = (props) => {
+        const [priceRange, setPriceRange] = useState(null);
+        const [activity, setActivity] = useState([]);
+        const [ambiente, setAmbiente] = useState([]);
+
+        const handlePriceRange = (range) => {
+            
+            setPriceRange(range)
+            
+            if(range === priceRange){
+                setPriceRange(null);
+            }
+        }
+
+        const handleActivitySelection = (selectedActvity) => {
+            setActivity([...activity, selectedActvity])
+
+            if (activity.includes(selectedActvity)){
+                setActivity(activity.filter(a => a !== selectedActvity))                
+            }
+        }
+
+        const handleAmbienteSelection = (selectedAmbiente) => {
+            setAmbiente([...ambiente, selectedAmbiente])
+
+            if (ambiente.includes(selectedAmbiente)){
+                setAmbiente(ambiente.filter(a => a !== selectedAmbiente))                
+            }
+        }        
+
+
+        const sliderThumb = (props) => {
         const { value } = props 
 
     return (
     <View style={styles.thumbContainer}>
       <View style={styles.thumbCircle} />
       <Text style={styles.thumbLabel}>{Math.round(value)} km</Text>
-    </View>
-        
+    </View>       
         );
     };
 
@@ -29,18 +59,18 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
 
                 <View style={styles.options_container}>
                 
-                <View style={styles.section_container}>
+                <View style={styles.section_container}> 
                     <Text style={[styles.view_title, {marginLeft: 10}]}>Faixa de Preços</Text>
                     <View style={styles.filter_container}>
-                    <TouchableOpacity style={styles.filter_button}>
+                    <TouchableOpacity onPress={() => handlePriceRange('gratuito')} style={[styles.filter_button, priceRange === 'gratuito' && styles.filter_button_selected]}>
                         <Text style={styles.filter_text}>Gratuito</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.filter_button}>
+                    <TouchableOpacity onPress={() => handlePriceRange('economico')} style={[styles.filter_button, priceRange === 'economico' && styles.filter_button_selected]}>
                         <Text style={styles.filter_text}>Econômico</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.filter_button}>
+                    <TouchableOpacity onPress={() => handlePriceRange('premium')} style={[styles.filter_button, priceRange === 'premium' && styles.filter_button_selected]}>
                         <Text style={styles.filter_text}>Premium</Text>
                     </TouchableOpacity>
                     </View>
@@ -85,8 +115,8 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                     <Text style={styles.view_title}>Atividades Favoritas</Text>
                     <View style={styles.filter_container}>
 
-                        <TouchableOpacity style={styles.activity_button}>
-                            <Text style={styles.activity_text}>Gastronomia</Text>
+                        <TouchableOpacity onPress={() => handleActivitySelection('gastro')} style={[styles.activity_button, activity.includes('gastro') && styles.activity_button_active]}>
+                            <Text  style={styles.activity_text}>Gastronomia</Text>
                             <Image
                             style={styles.activity_img} 
                                 source={require('../assets/images/gastropng.png')}
@@ -94,7 +124,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                             ></Image>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.activity_button}>
+                        <TouchableOpacity onPress={() => handleActivitySelection('nat')} style={[styles.activity_button, activity.includes('nat') && styles.activity_button_active]}>
                             <Text style={styles.activity_text}>Natureza</Text>
                             <Image
                             style={styles.activity_img}
@@ -102,7 +132,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                             ></Image>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.activity_button}>
+                        <TouchableOpacity onPress={() => handleActivitySelection('sport')} style={[styles.activity_button, activity.includes('sport') && styles.activity_button_active]}>
                             <Text style={styles.activity_text}>Esporte</Text>
                             <Image
                             style={styles.activity_img}
@@ -114,7 +144,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
 
                     <View style={styles.filter_container}>
 
-                        <TouchableOpacity style={styles.activity_button}>
+                        <TouchableOpacity onPress={() => handleActivitySelection('mus')} style={[styles.activity_button, activity.includes('mus') && styles.activity_button_active]}>
                             <Text style={styles.activity_text}>Museus</Text>
                             <Image
                             style={styles.activity_img}
@@ -122,7 +152,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                             ></Image>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.activity_button}>
+                        <TouchableOpacity onPress={() => handleActivitySelection('party')} style={[styles.activity_button, activity.includes('party') && styles.activity_button_active]}>
                             <Text style={styles.activity_text}>Festas</Text>
                             <Image
                             style={styles.activity_img}
@@ -130,7 +160,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                             ></Image>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.activity_button}>
+                        <TouchableOpacity onPress={() => handleActivitySelection('shop')} style={[styles.activity_button, activity.includes('shop') && styles.activity_button_active]}>
                             <Text style={styles.activity_text}>Compras</Text>
                             <Image
                             style={styles.activity_img}
@@ -148,28 +178,28 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                     <Text style={styles.view_title}>Tipo de Ambiente</Text>
 
                     <View style={[styles.filter_container, {justifyContent: 'flex-start'}]}>
-                        <TouchableOpacity style={styles.filter_button2}>
+                        <TouchableOpacity onPress={() => handleAmbienteSelection('pet')} style={[styles.filter_button2, ambiente.includes('pet') && styles.filter_button2_active]}>
                             <Text style={styles.filter_text}>Pet-friendly</Text>
                         </TouchableOpacity>
                         
                         
-                        <TouchableOpacity style={styles.filter_button2}>
+                        <TouchableOpacity onPress={() => handleAmbienteSelection('child')} style={[styles.filter_button2, ambiente.includes('child') && styles.filter_button2_active]}>
                             <Text style={styles.filter_text}>Ideal para crianças</Text>
                         </TouchableOpacity>                    
 
                     </View>
 
                     <View style={[styles.filter_container, {justifyContent: 'flex-start'}]}>
-                        <TouchableOpacity style={styles.filter_button2}>
+                        <TouchableOpacity onPress={() => handleAmbienteSelection('adult')} style={[styles.filter_button2, ambiente.includes('adult') && styles.filter_button2_active]}>
                             <Text style={styles.filter_text}>Para adultos</Text>
                         </TouchableOpacity>
                         
                         
-                        <TouchableOpacity style={styles.filter_button2}>
+                        <TouchableOpacity onPress={() => handleAmbienteSelection('outdoor')} style={[styles.filter_button2, ambiente.includes('outdoor') && styles.filter_button2_active]}>
                             <Text style={styles.filter_text}>Ao ar livre</Text>
                         </TouchableOpacity>                   
 
-                        <TouchableOpacity style={styles.filter_button2}>
+                        <TouchableOpacity onPress={() => handleAmbienteSelection('indoor')} style={[styles.filter_button2, ambiente.includes('indoor') && styles.filter_button2_active]}>
                             <Text style={styles.filter_text}>Indoor</Text>
                         </TouchableOpacity>                     
 
@@ -273,8 +303,26 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
         marginLeft: 10,
     },
 
+    filter_button_selected: {
+        borderColor: "#3D348B",
+        borderWidth: 1,
+        paddingVertical: 9 ,
+        paddingHorizontal: 30,
+        borderRadius: 6,
+        marginLeft: 10,
+    },    
+
      filter_button2: {
         borderColor: "#F18701",
+        borderWidth: 1,
+        paddingVertical: 8,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        marginLeft: 10,
+    },   
+
+     filter_button2_active: {
+        borderColor: "#3D348B",
         borderWidth: 1,
         paddingVertical: 8,
         paddingHorizontal: 8,
@@ -380,6 +428,17 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
         width: screenWidth/3 - 20,
         height: 80
   },
+
+  activity_button_active: {
+        borderColor: "#3D348B",
+        borderWidth: 1,
+        paddingVertical: 5 ,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        marginHorizontal: 5,
+        width: screenWidth/3 - 20,
+        height: 80
+  },  
 
   activity_text: {
     fontFamily: 'NunitoSans_300Light',
