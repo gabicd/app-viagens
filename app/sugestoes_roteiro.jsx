@@ -6,22 +6,33 @@ const { width: screenWidth } = Dimensions.get('window');
 
 function SugestoesRoteiro() {
   const params = useLocalSearchParams();
-  const {quantity} = params;
+  
+  {/* 
+  const {mood} = params;
+  console.log(mood)    
+    */}
 
-  console.log(quantity)
+
+  const { quantity } = params
 
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-            <AntDesign name="arrowleft" size={16} color="black" />
-            <Text style={styles.texto_header}>Humor: /mood/</Text>
+            <Link href='/novoroteiro'>
+              <TouchableOpacity>
+                <AntDesign name="arrowleft" size={16} color="black" />    
+              </TouchableOpacity>
+            </Link>
+            
+            
+            <Text style={styles.texto_header}>Humor: mood</Text>
         </View>
 
 
         <View style={styles.card_container}>
             <View style={styles.filter_container}>
-
-            { quantity!= 0 && <Text style={styles.filter_number}>{quantity}</Text> }
+            {/*  */}
+            { quantity > 0 && <Text style={styles.filter_number}>{quantity}</Text> }
 
                 <Text style={styles.filter_text}>Filtrar</Text>
                  
@@ -138,9 +149,9 @@ const styles = StyleSheet.create({
   filter_number: {
     color: 'white',
     backgroundColor: '#3D348B',
-    paddingHorizontal: 9,
-    paddingVertical: 5,
-    borderRadius: 16,
+    paddingHorizontal: 10.5,
+    paddingVertical: 6,
+    borderRadius: 20,
     fontFamily: 'NunitoSans_700Bold',
     fontSize: 12,
     marginRight: 4  
@@ -195,21 +206,21 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'NunitoSans_700Bold',
     marginBottom: 5, 
     color: '#333',
   },
 
   priceText: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'NunitoSans_700Bold',
-    marginBottom: 5, 
+    marginBottom: 0 , 
     color: '#3D348B',    
   },
 
   distanceText: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'NunitoSans_700Bold',
     marginBottom: 5, 
     color: '#F35B04',    

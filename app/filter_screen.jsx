@@ -14,45 +14,48 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
         const [ambiente, setAmbiente] = useState([]);
         const [filterQuantity, setFilterQuantity] = useState(0);
 
-        const handleFilterQuantity = () => {
-            
-            if (priceRange){
-                setFilterQuantity(1 + activity.length + ambiente.length)
-            }
-            
-            else {
-                setFilterQuantity(activity.length + ambiente.length)
-            }
-            
-        }
-
         const handlePriceRange = (range) => {
-            
-            setPriceRange(range)
-            
             if(range === priceRange){
                 setPriceRange(null);
+                setFilterQuantity(filterQuantity => filterQuantity-1)
+            }            
+            
+            else{
+            setPriceRange(range)
+            setFilterQuantity(filterQuantity => filterQuantity+1)
             }
+
         }
 
         const handleActivitySelection = (selectedActvity) => {
-            setActivity([...activity, selectedActvity])
-
             if (activity.includes(selectedActvity)){
                 setActivity(activity.filter(a => a !== selectedActvity))                
+                setFilterQuantity(filterQuantity => filterQuantity-1)
             }
+
+            else{
+            setActivity([...activity, selectedActvity])
+            setFilterQuantity(filterQuantity => filterQuantity+1)
+            }    
+
         }
 
         const handleAmbienteSelection = (selectedAmbiente) => {
-            setAmbiente([...ambiente, selectedAmbiente])
-
             if (ambiente.includes(selectedAmbiente)){
-                setAmbiente(ambiente.filter(a => a !== selectedAmbiente))                
+                setAmbiente(ambiente.filter(a => a !== selectedAmbiente))
+                setFilterQuantity(filterQuantity => filterQuantity-1)                
             }
+
+            else {
+                setAmbiente([...ambiente, selectedAmbiente])
+                setFilterQuantity(filterQuantity => filterQuantity+1)
+            }
+            
+
         }    
         
         const applyFilter = () => {
-            handleFilterQuantity();
+
             console.log(filterQuantity)
             router.push({
                 pathname: '/sugestoes_roteiro',
@@ -79,7 +82,11 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
             <View style={styles.container}>
                 
                 <View style={styles.header}>
-                    <AntDesign name="arrowleft" size={16} color="black" />
+                    <TouchableOpacity onPress={() => router.back()}>
+                        <AntDesign name="arrowleft" size={16} color="black" />    
+                    </TouchableOpacity>
+                    
+                    
                     <Text style={styles.texto_header}>Filtros</Text>
                 </View>
 

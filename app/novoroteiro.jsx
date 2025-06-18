@@ -1,19 +1,40 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const { width: screenWidth } = Dimensions.get('window');
 
 function NovoRoteiro (){
-
+  const router = useRouter();
   const [selectedMood, setSelectedMood] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
   
-
   const handleSelectMood = (mood) => {
+      
+      if(mood === selectedMood){
+        setSelectedMood(null)
+      }
+    
+      else {
       setSelectedMood(mood);
       console.log(`Selected mood: ${mood}`); 
-      
+      }
+  }
+
+  const handleConfirm = () => {
+    if(!selectedMood){
+      setModalVisible(true);
+    }
+
+    else {
+            router.push({
+                pathname: 'sugestoes_roteiro',
+                params: {
+                    mood: selectedMood,
+                }
+            });      
+    }
   }
 
 
@@ -92,9 +113,34 @@ return (
 
         </View>
 
-        <TouchableOpacity style={styles.confirm_button}>
+        <TouchableOpacity style={styles.confirm_button}
+          onPress={() => handleConfirm()
+          }
+        >
             <Text style={styles.button_text}>Confirmar</Text>
         </TouchableOpacity>
+
+            <Modal
+                animationType="fade" 
+                transparent={true}     
+                visible={isModalVisible} 
+                onRequestClose={() => {
+                    setModalVisible(false); 
+                }}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.modalTitle}>Atenção</Text>
+                        <Text style={styles.modalMessage}>Por favor, selecione um humor antes de continuar.</Text>
+                        <TouchableOpacity
+                            style={styles.modalButton}
+                            onPress={() => setModalVisible(false)} 
+                        >
+                            <Text style={styles.modalButtonText}>Ok, entendi</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
 
       </View>
       
@@ -193,7 +239,7 @@ const styles = StyleSheet.create({
     width: screenWidth / 2 - 73, 
     height: screenWidth / 2 - 73, 
     borderRadius: (screenWidth / 2 - 70) / 2, 
-        backgroundColor: 'white', // Fundo branco para criar a separação
+        backgroundColor: 'white', 
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -221,6 +267,49 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSans_700Bold",
     textAlign: "center",
   },
+
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    },
+    modalContainer: {
+        width: '80%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    modalMessage: {
+        fontSize: 16,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+    modalButton: {
+        backgroundColor: '#F18701', 
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    modalButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    }, 
+  
 });
 
 

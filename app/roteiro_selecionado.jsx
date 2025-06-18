@@ -186,7 +186,9 @@ const styles = StyleSheet.create({
     description_text: {
         fontFamily: 'NunitoSans_600SemiBold',
         fontSize: 16
-    }
+    },
+
+    
 
 })
 
