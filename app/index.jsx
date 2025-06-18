@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginHorizontal: 10,
+    resizeMode: 'contain'
   },
 
 });

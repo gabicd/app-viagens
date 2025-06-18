@@ -1,4 +1,5 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useRouter } from 'expo-router';
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -7,13 +8,17 @@ const { height: screenHeight } = Dimensions.get('window');
 
 function roteiroSelecionado () {
 
-
+const router = useRouter();
 
 
     return(
         <View style={styles.container}>
             <View style={styles.header}>
-                <AntDesign name="arrowleft" size={16} color="black" />
+                <TouchableOpacity onPress={() => router.back()}>
+                    <AntDesign name="arrowleft" size={16} color="black" />
+                </TouchableOpacity>
+                
+                
                 <Text style={styles.texto_header}>Roteiro</Text>
             </View>
             

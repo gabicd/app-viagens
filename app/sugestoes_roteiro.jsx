@@ -1,10 +1,15 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { Link } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const { width: screenWidth } = Dimensions.get('window');
 
 function SugestoesRoteiro() {
+  const params = useLocalSearchParams();
+  const {quantity} = params;
+
+  console.log(quantity)
+
   return (
     <View style={styles.container}>
         <View style={styles.header}>
@@ -15,6 +20,9 @@ function SugestoesRoteiro() {
 
         <View style={styles.card_container}>
             <View style={styles.filter_container}>
+
+            { quantity!= 0 && <Text style={styles.filter_number}>{quantity}</Text> }
+
                 <Text style={styles.filter_text}>Filtrar</Text>
                  
                  <Link href={"/filter_screen"} asChild>
@@ -125,6 +133,17 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontFamily: "NunitoSans_700Bold",
     color: "#9D9D9D",
+  },
+
+  filter_number: {
+    color: 'white',
+    backgroundColor: '#3D348B',
+    paddingHorizontal: 9,
+    paddingVertical: 5,
+    borderRadius: 16,
+    fontFamily: 'NunitoSans_700Bold',
+    fontSize: 12,
+    marginRight: 4  
   },
 
     card_row:{

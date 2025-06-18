@@ -1,5 +1,6 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { RangeSlider } from '@react-native-assets/slider';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -7,9 +8,23 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
 
     function Filter () {
 
+        const router =  useRouter();
         const [priceRange, setPriceRange] = useState(null);
         const [activity, setActivity] = useState([]);
         const [ambiente, setAmbiente] = useState([]);
+        const [filterQuantity, setFilterQuantity] = useState(0);
+
+        const handleFilterQuantity = () => {
+            
+            if (priceRange){
+                setFilterQuantity(1 + activity.length + ambiente.length)
+            }
+            
+            else {
+                setFilterQuantity(activity.length + ambiente.length)
+            }
+            
+        }
 
         const handlePriceRange = (range) => {
             
@@ -34,19 +49,30 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
             if (ambiente.includes(selectedAmbiente)){
                 setAmbiente(ambiente.filter(a => a !== selectedAmbiente))                
             }
-        }        
+        }    
+        
+        const applyFilter = () => {
+            handleFilterQuantity();
+            console.log(filterQuantity)
+            router.push({
+                pathname: '/sugestoes_roteiro',
+                params: {
+                    quantity: filterQuantity
+                }
+            })
+        }
 
 
         const sliderThumb = (props) => {
         const { value } = props 
 
-    return (
-    <View style={styles.thumbContainer}>
-      <View style={styles.thumbCircle} />
-      <Text style={styles.thumbLabel}>{Math.round(value)} km</Text>
-    </View>       
-        );
-    };
+        return (
+        <View style={styles.thumbContainer}>
+        <View style={styles.thumbCircle} />
+        <Text style={styles.thumbLabel}>{Math.round(value)} km</Text>
+        </View>       
+            );
+        };
 
 
         return (
@@ -210,7 +236,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                 </View>
 
                 <View style={[styles.section_container, {marginTop: 0}]}>
-                    <TouchableOpacity style={styles.confirm_button}>
+                    <TouchableOpacity style={styles.confirm_button} onPress={() => applyFilter()}>
                         <Text style={styles.confirm_text}>Aplicar Filtros</Text>
                     </TouchableOpacity>
                 </View>

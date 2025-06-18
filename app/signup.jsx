@@ -1,16 +1,46 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
+import { Asset } from 'expo-asset';
 import { Link, useRouter } from "expo-router";
-import { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  InteractionManager,
+  StyleSheet, Text, TextInput, TouchableOpacity, View
+} from "react-native";
 
 function SignUpScreen() {
 
   const router = useRouter();
+  const mapaImage = require('../assets/images/vetor-mapa.png');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try{
+        const imageAsset = Asset.fromModule(mapaImage);
+        await imageAsset.downloadAsync();
+      } catch (error) {
+        console.error("Error loading images:", error);
+      }
+
+      finally {
+        InteractionManager.runAfterInteractions(() => {
+        setImagesLoaded(true);
+        })
+      }
+    };
+
+    loadImages();
+  }, []);
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -18,6 +48,14 @@ function SignUpScreen() {
 
     const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  }
+
+  if (!imagesLoaded) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#3D348B" />
+      </View>
+    );
   }
 
   return (
@@ -37,14 +75,20 @@ function SignUpScreen() {
       <View style={styles.info_container}>
         <View style={styles.input_group_top}>
           <Text style={styles.label}>Nome</Text>
-            <TextInput placeholder="Seu Nome" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}>
-          </TextInput>
+            <TextInput placeholder="Seu Nome" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}
+              value={name}
+              onChangeText={setName}
+            />
+          
         </View>
 
         <View style={styles.input_group}>
           <Text style={styles.label}>E-mail</Text>
-          <TextInput placeholder="Seu E-mail" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}>
-          </TextInput>
+          <TextInput placeholder="Seu E-mail" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}
+            value={email}
+            onChangeText={setEmail}
+          />
+          
         </View>
 
         <View style={styles.input_group}>

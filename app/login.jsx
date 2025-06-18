@@ -10,6 +10,7 @@ function LoginScreen() {
   const router = useRouter();
   const mapaImage = require('../assets/images/vetor-mapa.png');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   
@@ -62,8 +63,12 @@ function LoginScreen() {
       <View style={styles.info_container}>
         <View style={styles.input_group_top}>
           <Text style={styles.label}>E-mail</Text>
-            <TextInput placeholder="Seu E-mail" placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}>
-          </TextInput>
+            <TextInput placeholder="Seu E-mail" 
+            placeholderTextColor='rgba(217, 217, 217, 0.28)' style={styles.input_field}
+            value={email}
+            onChangeText={setEmail}
+            />
+          
         </View>
         <View style={styles.input_group}>
           <Text style={styles.label}>Senha</Text>
