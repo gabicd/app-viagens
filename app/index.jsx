@@ -8,7 +8,7 @@ export default function Index() {
         <Image
             style={styles.app_logo}
             resizeMode="cover"
-            source={require('/home/gabis/projetos/rn-app/assets/images/vetor mapa corrigido.png')}/>
+            source={require('../assets/images/vetor mapa corrigido.png')}/>
       
       <View style={styles.div_buttons}>
         

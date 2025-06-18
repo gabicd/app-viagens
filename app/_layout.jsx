@@ -1,4 +1,4 @@
-import { NunitoSans_700Bold } from "@expo-google-fonts/nunito-sans"; // Sua fonte
+import { NunitoSans_300Light, NunitoSans_500Medium, NunitoSans_700Bold } from "@expo-google-fonts/nunito-sans"; // Sua fonte
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
 
   const [fontsLoaded, fontError] = useFonts({
-    NunitoSans_700Bold,
+    NunitoSans_700Bold, NunitoSans_300Light, NunitoSans_500Medium
 
   });
 
@@ -34,6 +34,8 @@ export default function RootLayout() {
         <Stack.Screen name="signup" options={{ title: "signup", headerShown: false }} />
         <Stack.Screen name="main_screen" options={{ title: "main_screen", headerShown: false }} />
         <Stack.Screen name="novoroteiro" options={{ title: "Novo Roteiro", headerShown: false }} />
+        <Stack.Screen name="sugestoes_roteiro" options={{ title: "sugestoesroteiro", headerShown: false }} />
+        <Stack.Screen name="filter_screen" options={{ headerShown: false }} />
       </Stack>
     </View>
   );

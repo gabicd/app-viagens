@@ -62,7 +62,7 @@ return (
 
         </View>
 
-                <View style={styles.mood_row}>
+        <View style={styles.mood_row}>
             <View style={styles.mood_icon}>
                 <TouchableOpacity onPress={() => handleSelectMood('romantico')}>
                   
@@ -76,19 +76,17 @@ return (
                 </TouchableOpacity>
                 
                 <Text style={styles.mood_text}>Romântico</Text>
-            </View>
+          </View>
             
             <View style={styles.mood_icon}>
                 <TouchableOpacity onPress={() => handleSelectMood('social')}>
-                <View style={[styles.mood_image_container, selectedMood === 'social' && styles.mood_image_container_selected]}>
-                  <View style={styles.circulo_interno}>
-                    <Image style={styles.mood_image} source={require('../assets/images/icon social.png')}>
-                    </Image>                    
+                  <View style={[styles.mood_image_container, selectedMood === 'social' && styles.mood_image_container_selected]}>
+                    <View style={styles.circulo_interno}>
+                      <Image style={styles.mood_image} source={require('../assets/images/icon social.png')}>
+                      </Image>                    
+                    </View>
                   </View>
-                </View>
-
-                </TouchableOpacity>
-                
+                </TouchableOpacity>                
                 <Text style={styles.mood_text}>Social</Text>
             </View>
 
