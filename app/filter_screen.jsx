@@ -13,6 +13,9 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
         const [activity, setActivity] = useState([]);
         const [ambiente, setAmbiente] = useState([]);
         const [filterQuantity, setFilterQuantity] = useState(0);
+        const [min, setMin] = useState(null);
+        const [max, setMax] = useState(null);
+
 
         const handlePriceRange = (range) => {
             if(range === priceRange){
@@ -94,29 +97,35 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
                 
                 <View style={styles.section_container}> 
                     <Text style={[styles.view_title, {marginLeft: 10}]}>Faixa de Preços</Text>
-                    <View style={styles.filter_container}>
-                    <TouchableOpacity onPress={() => handlePriceRange('gratuito')} style={[styles.filter_button, priceRange === 'gratuito' && styles.filter_button_selected]}>
-                        <Text style={styles.filter_text}>Gratuito</Text>
-                    </TouchableOpacity>
+                    <View style={[styles.filter_container, {paddingRight: 10}]}>
+                        <TouchableOpacity onPress={() => handlePriceRange('gratuito')} style={[styles.filter_button, priceRange === 'gratuito' && (!min || !max) && styles.filter_button_selected]}>
+                            <Text style={styles.filter_text}>Gratuito</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => handlePriceRange('economico')} style={[styles.filter_button, priceRange === 'economico' && styles.filter_button_selected]}>
-                        <Text style={styles.filter_text}>Econômico</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handlePriceRange('economico')} style={[styles.filter_button, priceRange === 'economico' && (!min || !max) && styles.filter_button_selected]}>
+                            <Text style={styles.filter_text}>Econômico</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => handlePriceRange('premium')} style={[styles.filter_button, priceRange === 'premium' && styles.filter_button_selected]}>
-                        <Text style={styles.filter_text}>Premium</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handlePriceRange('premium')} style={[styles.filter_button, priceRange === 'premium' && (!min || !max) && styles.filter_button_selected]}>
+                            <Text style={styles.filter_text}>Premium</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={styles.minmax_container}> 
                         <View style={styles.input_container}>
                             <Text style={styles.minmax_text}>Min:</Text>
-                            <TextInput style={styles.minmax_input} placeholder="R$ 0,00" placeholderTextColor='#9D9D9D' keyboardType="numeric" />
+                            <TextInput style={styles.minmax_input} placeholder="R$ 0,00" placeholderTextColor='#9D9D9D' keyboardType="numeric" 
+                                value={min}
+                                onChangeText={setMin}
+                            />
                         </View>
 
                         <View style={styles.input_container}>
                             <Text style={styles.minmax_text}>Max:</Text>
-                            <TextInput style={styles.minmax_input} placeholder="R$ 100.000,00" placeholderTextColor='#9D9D9D' keyboardType="numeric" />
+                            <TextInput style={styles.minmax_input} placeholder="R$ 10.000,00" placeholderTextColor='#9D9D9D' keyboardType="numeric" 
+                                value={max}
+                                onChangeText={setMax}
+                            />
                         </View> 
 
                     </View>
@@ -328,19 +337,21 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
     },
 
     filter_button: {
+        width: screenWidth/3 - 20,
         borderColor: "#F18701",
         borderWidth: 1,
         paddingVertical: 9 ,
-        paddingHorizontal: 30,
+        paddingHorizontal: 15,
         borderRadius: 6,
         marginLeft: 10,
     },
 
     filter_button_selected: {
+        width: screenWidth/3 - 20,
         borderColor: "#3D348B",
         borderWidth: 1,
         paddingVertical: 9 ,
-        paddingHorizontal: 30,
+        paddingHorizontal: 15,
         borderRadius: 6,
         marginLeft: 10,
     },    
@@ -393,6 +404,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
         paddingHorizontal: 15,
         borderRadius: 8,
         width: screenWidth * 0.30,
+        overflow: 'hidden',
     },
 
     separator: {
@@ -481,6 +493,7 @@ import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View 
   filter_text: {
     fontFamily: 'NunitoSans_500Medium',
     fontSize:14,
+    textAlign: 'center'
   },
 
   confirm_button: {

@@ -1,6 +1,8 @@
 import Feather from '@expo/vector-icons/Feather';
 import { Link } from "expo-router";
-import { Dimensions, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import CardMain from './components/CardMain';
+import SmallCardMain from './components/SmallCardMain';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -19,55 +21,25 @@ function MainScreen() {
             <View style={styles.card_row}>
                 
                 <Link href={"/novoroteiro"} asChild>
-                    <Pressable>
-                      <View style={styles.card_small}>
-                        <Image
-                            source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
-                            style={styles.cardImage}
-                            resizeMode="cover" 
-                        />
-                        <View style={styles.cardContent}>
-                            <Text style={styles.cardTitle}>Novo Roteiro</Text>
-                        </View>            
-                    </View> 
-                    </Pressable>
+                  <SmallCardMain
+                  title='Novo roteiro'  
+                  > 
+                  </SmallCardMain>
+                </Link>        
 
-                </Link>       
-
-                <View style={styles.card_small}>
-                    <Image
-                        source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
-                        style={styles.cardImage}
-                        resizeMode="cover" 
-                    />
-
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Pontos Mood</Text>
-                    </View>            
-                </View>
+                  <SmallCardMain
+                  title='Pontos Mood'                  
+                  ></SmallCardMain>
+            
             </View>
 
-            <View style={styles.card}>
-                <Image
-                    source={{ uri: 'https://placehold.co/600x300/D9D9D9/D9D9D9/png' }} 
-                    style={styles.cardImage}
-                    resizeMode="cover" 
-                />
-                <View style={styles.cardContent}>
-                    <Text style={styles.cardTitle}>Título do Meu Card Grande</Text>
-                </View>
-            </View>
+            <CardMain
+            title='Titulo card grande'
+            ></CardMain>
 
-            <View style={styles.card}>
-                <Image
-                    source={{ uri: 'https://placehold.co/600x300/D9D9D9/D9D9D9/png' }} 
-                    style={styles.cardImage}
-                    resizeMode="cover" 
-                />
-                <View style={styles.cardContent}>
-                    <Text style={styles.cardTitle}>Título do Meu Card Grande</Text>
-                </View>
-            </View>
+            <CardMain
+            title='Titulo card grande'
+            ></CardMain>
 
         </View>
     </View>
@@ -127,53 +99,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginLeft: 'auto',
     
-  },
-
-    card_small: {
-    width: screenWidth/2 - 30,
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 10, 
-    overflow: 'hidden', 
-    marginVertical: 20, 
-    shadowColor: '#000', 
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 8, 
-  },
-
-    card: {
-    width: screenWidth - 40,  
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 10, 
-    overflow: 'hidden', 
-    marginBottom: 20, 
-    shadowColor: '#000', 
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 8, 
-  },
-
-  cardImage: {
-    width: '100%', 
-    height: 150, 
-    
-  },
-  cardContent: {
-    padding: 15, 
-  },
-  cardTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 5, 
-    color: '#333',
   },
 
   card_row:{

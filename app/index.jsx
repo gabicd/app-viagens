@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   return (
@@ -23,13 +23,17 @@ export default function Index() {
         <Text style={styles.option_text}>Ou então, continue com uma rede social</Text>
 
       <View style={styles.div_icons}>        
-        <Image
-            style={styles.social_icon}
-            source={require('../assets/images/facebook2.png')}/>
+        <TouchableOpacity>
+          <Image
+              style={styles.social_icon}
+              source={require('../assets/images/facebook2.png')}/>
+        </TouchableOpacity>
 
-        <Image
-            style={styles.social_icon}
-            source={require('../assets/images/google3.png')}/>
+        <TouchableOpacity>
+          <Image
+              style={styles.social_icon}
+              source={require('../assets/images/google3.png')}/>
+        </TouchableOpacity>
       </View>
       </View>
 

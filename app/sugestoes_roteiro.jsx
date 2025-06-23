@@ -1,6 +1,7 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import SmallCard from "./components/SmallCard";
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -18,7 +19,7 @@ function SugestoesRoteiro() {
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-            <Link href='/novoroteiro'>
+            <Link href='/novoroteiro' asChild>
               <TouchableOpacity>
                 <AntDesign name="arrowleft" size={16} color="black" />    
               </TouchableOpacity>
@@ -51,33 +52,17 @@ function SugestoesRoteiro() {
 
 
             <View style={styles.card_row}>
-                <View style={styles.card_small}>
-                    <Image
-                        source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
-                        style={styles.cardImage}
-                        resizeMode="cover" 
-                    />
+                <SmallCard
+                  title = 'Novo roteiro'
+                  price = 'R$ 50,00'
+                  distance = "XX km de você"
+                />
 
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Nome do roteiro</Text>
-                        <Text style={styles.priceText}>R$ 50,00</Text>
-                        <Text style={styles.distanceText}>XX km de você</Text>
-                    </View>            
-                </View>
-
-                <View style={styles.card_small}>
-                    <Image
-                        source={{ uri: 'https://placehold.co/400x250/D9D9D9/D9D9D9/png' }} 
-                        style={styles.cardImage}
-                        resizeMode="cover" 
-                    />
-
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Nome do roteiro</Text>
-                        <Text style={styles.priceText}>R$ 50,00</Text>
-                        <Text style={styles.distanceText}>XX km de você</Text>
-                    </View>            
-                </View>                
+                <SmallCard
+                  title = 'Novo roteiro'
+                  price = 'R$ 50,00'
+                  distance = "XX km de você"
+                />
             </View>
         </View>
            
@@ -163,68 +148,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
      
   },
-
-    card_small: {
-    width: screenWidth/2 - 30,
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 10, 
-    overflow: 'hidden', 
-    marginVertical: 20, 
-    shadowColor: '#000', 
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 8, 
-  },
-
-    card: {
-    width: screenWidth - 40,  
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 10, 
-    overflow: 'hidden', 
-    marginBottom: 20, 
-    shadowColor: '#000', 
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 8, 
-  },
-
-  cardImage: {
-    width: '100%', 
-    height: 150, 
-    
-  },
-  cardContent: {
-    padding: 15, 
-  },
-
-  cardTitle: {
-    fontSize: 16,
-    fontFamily: 'NunitoSans_700Bold',
-    marginBottom: 5, 
-    color: '#333',
-  },
-
-  priceText: {
-    fontSize: 16,
-    fontFamily: 'NunitoSans_700Bold',
-    marginBottom: 0 , 
-    color: '#3D348B',    
-  },
-
-  distanceText: {
-    fontSize: 16,
-    fontFamily: 'NunitoSans_700Bold',
-    marginBottom: 5, 
-    color: '#F35B04',    
-  }
   
   
 });

@@ -1,12 +1,31 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 
 const { width: screenWidth } = Dimensions.get('window');
 const { height: screenHeight } = Dimensions.get('window');
 
 
 function roteiroSelecionado () {
+
+    const [saveState, setSaveState] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const share = () => {
+        setModalVisible(true)
+    } 
+
+    const closeModal = () => {
+        setModalVisible(false)
+    }
+
+    const handleSaveState = () => {
+        setSaveState(!saveState)
+    }
+
 
 const router = useRouter();
 
@@ -43,19 +62,30 @@ const router = useRouter();
             </ScrollView>
 
             <View style={styles.footer}>
-                <TouchableOpacity >
-                    <View style={styles.save_button}>
+                <TouchableOpacity onPress={() => handleSaveState()}>
+                    
+                    {saveState === false &&
+                    
+                    <View style={styles.save_button}>                       
                         <Text style={styles.button_text}>Salvar</Text>
-                        <Image 
-                            style={styles.save_button_image}
-                            source={require('../assets/images/saveIcon.png')}
+                        <Ionicons name="bookmark-outline" size={18} color="white" />
+                    </View>   
+
+                    }
+
+                    {saveState === true &&
+                    
+                    <View style={styles.save_button}>
                         
-                        />
-                    </View>                        
+                        <Text style={styles.button_text}>Salvo</Text>
+                        <Ionicons name="bookmark" size={18} color="white" />
+                    </View>   
+                    
+                    } 
                 
                 </TouchableOpacity>
 
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => share()} >
                     
                     <View style={styles.invite_button}>
                         <Text style={styles.button_text}>Convidar amigos</Text>
@@ -66,6 +96,9 @@ const router = useRouter();
                     </View>
                     
                 </TouchableOpacity>
+            
+            
+            
             </View>
 
         </View>
@@ -188,7 +221,60 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
 
-    
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    },
+    modalContainer: {
+        width: '100%',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20 ,
+        padding: 20,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontFamily: 'NunitoSans_700Bold',
+        marginBottom: 10,
+    },
+    modalMessage: {
+        fontSize: 16,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+    modalButton: {
+        backgroundColor: '#F18701', 
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    modalButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },     
+
+    modal_dragdown : {
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        backgroundColor: '#9D9D9D',
+        opacity: 0.5,
+        width: '45%' ,
+        height: 3,
+        borderRadius: 8,    
+        margin: 'auto',
+        marginBottom: 5        
+    }
 
 })
 
