@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# Front-end Aplicativo de Viagens ✈
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Projeto criado utilizando React Native e Expo
 
-## Get started
+## Para iniciar
 
-1. Install dependencies
+1. Instalar dependências
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Iniciar o aplicativo
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Telas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Tela inicial de primeira abertura do aplicativo
+- Login
+- Cadastro
+- Tela inicial principal
+- Criação de novo roteiro
+- Sugestões de roteiro
+- Seleção de filtros
+- Visualizar roteiro
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  As rotas não foram finalizadas, servem somente para testar a navegação entre as telas e visualização
 
-## Get a fresh project
+   Navegação feita em Stack
 
-When you're ready, run:
+## Objetivo inicial do aplicativo
 
-```bash
-npm run reset-project
-```
+O objetivo do aplicativo é auxiliar a criação de programações de viagens, sugerindo roteiros baseados entre a seleção de 4 "moods" distintos pelo usuário.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Escolhido o "mood", o usuário também pode filtrar as atividades sugeridas pela faixa de preço, distância, tipo de atividade, entre outras diversas opções para encontrar o roteiro ideal.
 
-## Learn more
+## Video demo
 
-To learn more about developing your project with Expo, look at the following resources:
+Demonstração do front em funcionamento
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
 
-Join our community of developers creating universal apps.
+https://github.com/user-attachments/assets/835e5d8f-75d8-4678-96da-92f0bad5b99b
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
